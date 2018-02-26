@@ -25,15 +25,51 @@ router.get('/:resource', function (req, res, next) {
     }
 })
 
-router.get('/:id', function (req, res, next) {
-    ZoneController.findById(req.query, function (err, result) {
-        if (err) {
+router.get('/:resource/:id', function (req, res, next) {
+
+    var resource = req.params.resource
+    var id = req.params.id
+
+    if (resource == 'zone') {
+        ZoneController.findById(req.query, function (err, result) {
+            if (err) {
+                res.json({
+                    confirmation: 'fail',
+                    message: err
+                })
+
+                return
+            }
+
             res.json({
-                confirmation: 'fail',
-                message: err
+                confirmation: 'success',
+                result: result
             })
-        }
-    })
+        })
+    }
+})
+
+router.post('/:resource', function (req, res, next) {
+
+    var resource = req.params.resource
+
+    if (resource == 'zone') {
+        ZoneController.create(req.body, function(err, result) {
+            if(err){
+                res.json({
+                    confirmation: 'fail',
+                    message: err
+                })
+
+                return
+            }
+
+            res.json({
+                confirmation: 'success',
+                result: result
+            })
+        })
+     }
 })
 
 module.exports = router
