@@ -2,7 +2,7 @@ var mongoose = require('mongoose')
 
 var ZoneSchema = new mongoose.Schema({
     name: {type:String, default:''},
-    zip: {type:[Number]},
+    zipCode: {type:Array, default:[]},
     timestamp: {type:Date, default:Date.now}
 })
 
