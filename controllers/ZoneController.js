@@ -54,13 +54,13 @@ module.exports = {
     },
 
     destroy: function (id, callback) {
-        findByIdAndRemove(id, function (err, zone) {
+        Zone.findByIdAndRemove(id, function (err) {
             if (err) {
                 callback(err, null)
                 return
             }
 
-            callback(null, zone)
+            callback(null, null)
         })
     }
 
